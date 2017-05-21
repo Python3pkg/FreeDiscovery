@@ -109,7 +109,7 @@ def _print_container(ctr, depth=0, debug=0):
                        + str(len(ctr.children)) + ' N_docs: '\
                        + str(len(ctr['document_id']))
 
-    print(''.join(['> ' * depth, message]))
+    print((''.join(['> ' * depth, message])))
 
     for child in ctr.children:
         _print_container(child, depth + 1, debug)

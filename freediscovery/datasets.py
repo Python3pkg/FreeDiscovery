@@ -39,15 +39,15 @@ def _download_dataset(cache_dir, fname, name, verify_checksum, verbose):
     base_url = "http://r0h.eu/d/{}.tar.gz".format(name)
 
     if verbose:
-        print('\nWarning: downloading dataset {} ({} MB) !'
-              .format(name, DATASET_SIZE[name]))
+        print(('\nWarning: downloading dataset {} ({} MB) !'
+              .format(name, DATASET_SIZE[name])))
     response = requests.get(base_url, stream=False, allow_redirects=True)
     with open(fname, "wb") as fh:
         for idx, chunk in enumerate(response.iter_content(chunk_size=1024)):
             if chunk:
                 fh.write(chunk)
         if verbose:
-            print('\nFile {} downloaded!'.format(fname))
+            print(('\nFile {} downloaded!'.format(fname)))
 
     if verify_checksum:
         # compute the md5 hash by chunks
@@ -69,7 +69,7 @@ def _download_dataset(cache_dir, fname, name, verify_checksum, verbose):
     with tarfile.open(fname, "r:gz") as tar:
         tar.extractall(path=cache_dir)
         if verbose:
-            print('Archive extracted!'.format(fname))
+            print(('Archive extracted!'.format(fname)))
 
 
 def _load_erdm_ground_truth(outdir):

@@ -5,7 +5,7 @@ Semantic Search Example [REST API]
 An example of Semantic Search
 """
 
-from __future__ import print_function
+
 
 import os.path
 import requests

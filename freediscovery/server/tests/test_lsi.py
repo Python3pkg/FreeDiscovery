@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
+
+
+
+
 
 import os
 import pytest
@@ -49,11 +49,11 @@ def test_api_lsi(app):
 
     method = V01 + "/lsi/{}".format(lid)
     data = app.get_check(method)
-    for key, vals in lsi_pars.items():
+    for key, vals in list(lsi_pars.items()):
         assert vals == data[key]
 
     assert sorted(data.keys()) == sorted(["n_components", "parent_id"])
 
-    for key in data.keys():
+    for key in list(data.keys()):
         assert data[key] == lsi_pars[key]
 

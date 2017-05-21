@@ -37,7 +37,7 @@ def binary_sensitivity_analysis(estimator, vocabulary, X_row):
                           'the number of features in X_row ({})')
                          .format(len(vocabulary), X_row.shape[1]))
 
-    vocabulary_inv = {ind: key for key, ind in vocabulary.items()}
+    vocabulary_inv = {ind: key for key, ind in list(vocabulary.items())}
 
     if type(estimator).__name__ == 'LogisticRegression':
         coef_ = estimator.coef_

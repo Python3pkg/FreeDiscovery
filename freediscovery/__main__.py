@@ -45,14 +45,14 @@ def _run(args):
 
     # redirect stdout / stderr to a file
     sys.stdout = _TeeLogger(log_fname)
-    print('='*80)
-    print(' '*20, 'FreeDiscovery server')
-    print(' '*21, '(version {})'.format(__version__))
-    print('='*80)
-    print(' * Started on {}'.format(time.strftime("%c")))
-    print(' * CACHE_DIR: {} [{}]'.format(cache_dir,
-                                         'EXISTING' if _cache_dir_exists else 'NEW'))
-    print(' * LOG_FILE: {}'.format(log_fname))
+    print(('='*80))
+    print((' '*20, 'FreeDiscovery server'))
+    print((' '*21, '(version {})'.format(__version__)))
+    print(('='*80))
+    print((' * Started on {}'.format(time.strftime("%c"))))
+    print((' * CACHE_DIR: {} [{}]'.format(cache_dir,
+                                         'EXISTING' if _cache_dir_exists else 'NEW')))
+    print((' * LOG_FILE: {}'.format(log_fname)))
 
     app = fd_app(cache_dir)
     if args.hostname == '0.0.0.0':
@@ -76,8 +76,8 @@ def _run(args):
                 'graceful_timeout': 18000,
             }
             parent_pid = os.getpid()
-            print(' * Server: gunicorn with {} workers'.format(args.n))
-            print(' * Running on http://{}/ (Press CTRL+C to quit)'.format(options['bind']))
+            print((' * Server: gunicorn with {} workers'.format(args.n)))
+            print((' * Running on http://{}/ (Press CTRL+C to quit)'.format(options['bind'])))
             GunicornApplication(app, options).run()
             return
         except SystemExit:
@@ -102,7 +102,7 @@ def _run(args):
 
 def _info(args):
 
-    print('FreeDiscovery version: {}'.format(__version__))
+    print(('FreeDiscovery version: {}'.format(__version__)))
 
     conda_exec = shutil.which('conda')
     pip_exec = shutil.which('pip')
@@ -130,9 +130,9 @@ def _list(args):
     res = fe.list_datasets()
     res = sorted(res, key=lambda row: row['creation_date'], reverse=True)
     for row in res:
-        print(' * Processed dataset {}'.format(row['id']))
-        print('    - data_dir: {}'.format(row['data_dir']))
-        print('    - creation_date: {}'.format(row['creation_date']))
+        print((' * Processed dataset {}'.format(row['id'])))
+        print(('    - data_dir: {}'.format(row['data_dir'])))
+        print(('    - creation_date: {}'.format(row['creation_date'])))
         for method in ['lsi', 'categorizer', 'cluster', 'dupdet',
                        'threading']:
             dpath = os.path.join(fe.cache_dir, row['id'], method)
@@ -140,9 +140,9 @@ def _list(args):
                 continue
             mid_list = os.listdir(dpath)
             if mid_list:
-                print('     # {}'.format(method))
+                print(('     # {}'.format(method)))
                 for mid in mid_list:
-                    print('       * {}'.format(mid))
+                    print(('       * {}'.format(mid)))
         print(' ')
 
 
@@ -150,16 +150,16 @@ def _show(args):
     cache_dir = _parse_cache_dir(args.cache_dir)
     p = PipelineFinder.by_id(mid=args.mid, cache_dir=cache_dir)
     print(p)
-    print(' * model_id: {}'.format(args.mid))
-    print(' * model_type: {}'.format(list(p.keys())[-1]))
-    print(' * file_path: {}'.format(p.get_path()))
+    print((' * model_id: {}'.format(args.mid)))
+    print((' * model_type: {}'.format(list(p.keys())[-1])))
+    print((' * file_path: {}'.format(p.get_path())))
     try:
         pars = joblib.load(os.path.join(p.get_path(), 'pars'))
-        for key, val in pars.items():
+        for key, val in list(pars.items()):
             val_str = str(val)
             if len(val_str) > 30 and not isinstance(val, dict):
                 continue
-            print(' * {}: {}'.format(key, val_str))
+            print((' * {}: {}'.format(key, val_str)))
     except:
         pass
 
@@ -183,7 +183,7 @@ def _rm(args):
                              overwrite=args.yes)
     if _del_mid:
         shutil.rmtree(fpath)
-        print('Folder {} deleted.'.format(fpath))
+        print(('Folder {} deleted.'.format(fpath)))
     else:
         print('Nothing to be done. Exiting.')
 

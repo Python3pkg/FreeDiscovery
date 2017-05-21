@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
+
+
+
+
 
 import os
 import pytest
@@ -29,7 +29,7 @@ def _check_htree_consistency(htree, dataset_size):
     max_tree_depth = np.max([row['cluster_depth'] for row in htree])
     for level in range(max_tree_depth):
         out = []
-        for srow in filter(lambda row: row['cluster_depth'] == level, htree):
+        for srow in [row for row in htree if row['cluster_depth'] == level]:
             out += [k['document_id'] for k in srow['documents']]
 
         assert len(out) == dataset_size, "depth={}".format(level)

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
+
+
+
+
 
 import re
 import numpy as np
@@ -106,7 +106,7 @@ def _replace_with_color_spans(textline, weights, colormap, norm):
     """
 
     html = textline
-    positions = _get_keyword_positions(textline, weights.keys())
+    positions = _get_keyword_positions(textline, list(weights.keys()))
     positions_no_overlap = _keep_longest_overlapping_substrings(positions)
 
 
@@ -274,7 +274,7 @@ def _create_random_weights(text, perc_keywords=0.5):
     _ = vect.fit([text])
     vocabulary = vect.vocabulary_
     nb_keywords = int(perc_keywords * len(vocabulary))
-    keywords = random.sample(vocabulary.keys(), nb_keywords)
+    keywords = random.sample(list(vocabulary.keys()), nb_keywords)
     features_weight = {word: rnd.random() for word in keywords}
     return features_weight
 
@@ -282,7 +282,7 @@ def _create_random_weights(text, perc_keywords=0.5):
 if __name__ == "__main__":
     fname = 'data/ds_001/raw/0.7.6.28635.txt'
     with open(fname) as in_file:  #, encoding='utf-8') as in_file:
-        document_text = in_file.read().replace(u'\ufeff','')
+        document_text = in_file.read().replace('\ufeff','')
     words_weights = _create_random_weights(document_text, 0.2)
 
     COLORMAP = _make_cmap()

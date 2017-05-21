@@ -49,8 +49,7 @@ _test_cases = itertools.product(
                        [None, 'fast'])
 
 # 'MLPClassifier', 'ensemble-stacking' not supported in production the moment
-_test_cases = filter(lambda x: not (x[1].startswith("Nearest") and x[2]),
-                     _test_cases)
+_test_cases = [x for x in _test_cases if not (x[1].startswith("Nearest") and x[2])]
 
 
 @pytest.mark.parametrize('use_lsi, method, cv', _test_cases)
@@ -236,7 +235,7 @@ def test_explain_categorization():
 
     weights = binary_sensitivity_analysis(model, vect.vocabulary_, X[0, :])
     # not all vocabulary keys are returned
-    assert len(weights.keys()) < len(vect.vocabulary_)
+    assert len(list(weights.keys())) < len(vect.vocabulary_)
 
 
 @pytest.mark.parametrize('n_steps', [2, 3])
@@ -276,7 +275,7 @@ def test_pipeline(n_steps):
         with pytest.raises(ValueError):
             pf.parent.parent.parent
 
-        for estimator_type, mid in pf.items():
+        for estimator_type, mid in list(pf.items()):
             path = str(pf.get_path(mid, absolute=False))
             if estimator_type == 'vectorizer':
                 assert re.match('ediscovery_cache.*', path)

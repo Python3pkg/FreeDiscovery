@@ -5,7 +5,7 @@ Data Ingestion Example [REST API]
 An example illustrating the data ingestion in FreeDiscovery
 """
 
-from __future__ import print_function
+
 
 import requests
 import pandas as pd
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     res = requests.get(url).json()
 
     print('\n'.join(['     - {}: {}'.format(key, val)
-          for key, val in res.items() if "filenames" not in key]))
+          for key, val in list(res.items()) if "filenames" not in key]))
 
     print("\n3. Examine the id mapping\n")
 

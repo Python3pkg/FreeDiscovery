@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
+
+
+
+
 
 import os
 from collections import OrderedDict
@@ -142,7 +142,7 @@ class PipelineFinder(OrderedDict):
     def parent(self):
         """ Make a new pipeline without the latest node """
 
-        if len(self.keys()) <= 1:
+        if len(list(self.keys())) <= 1:
             raise ValueError("Can't take the parent of a root node!")
 
         # create a copy
@@ -172,7 +172,7 @@ class PipelineFinder(OrderedDict):
         if mid is None:
             mid = self.mid
 
-        if mid not in self.values():
+        if mid not in list(self.values()):
             raise ValueError('{} is not a processing step current pipeline,\n {}'.format(mid, self)) 
         idx = list(self.values()).index(mid)
         valid_keys = list(self.keys())[:idx+1]

@@ -24,7 +24,7 @@ Copyright (c) 2003-2016, A.M. Kuchling.
 This code is under a BSD-style license; see the LICENSE file for details.
 """
 
-from __future__ import print_function
+
 from collections import deque, OrderedDict
 import re
 import sys
@@ -71,7 +71,7 @@ class Container(dict):
 
     def is_dummy(self):
         """Check if Container has some contents."""
-        return not len(self.keys())
+        return not len(list(self.keys()))
 
     def add_child(self, child):
         """Add a child to `self`.
@@ -453,7 +453,7 @@ def thread(messages, group_by_subject=True):
         
 
     # step two - find root set
-    root_set = [container for container in id_table.values()
+    root_set = [container for container in list(id_table.values())
                 if container.parent is None]
 
     # step three - delete id_table

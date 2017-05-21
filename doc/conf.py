@@ -357,6 +357,6 @@ autoclass_content = 'class' # don't document __init__
 
 # The following is used by sphinx.ext.linkcode to provide links to github
 linkcode_resolve = make_linkcode_resolve('freediscovery',
-                                         u'https://github.com/FreeDiscovery/'
+                                         'https://github.com/FreeDiscovery/'
                                          'FreeDiscovery/blob/{revision}/'
                                          '{package}/{path}#L{lineno}')

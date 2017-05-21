@@ -4,7 +4,7 @@ Duplicate Detection Example [REST API]
 
 Find near-duplicates in a text collection
 """
-from __future__ import print_function
+
 
 from time import time
 import sys
@@ -59,7 +59,7 @@ res = requests.get(url)
 
 data = res.json()
 print('\n'.join(['     - {}: {}'.format(key, val)
-      for key, val in data.items() if "filenames" not in key]))
+      for key, val in list(data.items()) if "filenames" not in key]))
 
 
 print("\n2. Near Duplicates detection by cosine similarity (DBSCAN)")

@@ -29,8 +29,8 @@ def _rename_main_thread():
     import threading
     if isinstance(threading.current_thread(), threading._MainThread) and \
        threading.current_thread().name != 'MainThread':
-        print('Warning: joblib: renaming current thread {} to "MainThread".'
-              .format(threading.current_thread().name))
+        print(('Warning: joblib: renaming current thread {} to "MainThread".'
+              .format(threading.current_thread().name)))
         threading.current_thread().name = 'MainThread'
 
 
@@ -135,7 +135,7 @@ def dict2type(d, collapse_lists=False, max_depth=10):
 
     if isinstance(d, dict):
         res = {}
-        for key, val in d.items():
+        for key, val in list(d.items()):
             res[key] = dict2type(val, collapse_lists, max_depth - 1)
         return res
     elif isinstance(d, list):

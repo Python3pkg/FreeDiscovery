@@ -22,7 +22,7 @@ def run(coverage=False):
 
 def run_cli(coverage=False):
     status = run(coverage=coverage)
-    print('Exit status: {}'.format(status))
+    print(('Exit status: {}'.format(status)))
     sys.exit(status)
 
 

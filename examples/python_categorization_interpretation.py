@@ -28,8 +28,8 @@ clf = LogisticRegression()
 clf.fit(X, newsgroups.target)
 
 repr_proba = 'Predicted: {0}: {{0:.2f}}, {1}: {{1:.2f}}'.format(*newsgroups.target_names)
-print(repr_proba.format(*clf.predict_proba(X[document_id])[0]))
-print('Actual label :', newsgroups.target_names[newsgroups.target[document_id]])
+print((repr_proba.format(*clf.predict_proba(X[document_id])[0])))
+print(('Actual label :', newsgroups.target_names[newsgroups.target[document_id]]))
 
 
 weights = binary_sensitivity_analysis(clf, vectorizer.vocabulary_, X[document_id])

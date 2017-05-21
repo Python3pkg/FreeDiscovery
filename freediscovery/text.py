@@ -42,7 +42,7 @@ def _vectorize_chunk(dsid_dir, k, pars, pretend=False):
     if pars['use_idf']:
         pars['binary'] = False  # need to apply TFIDF weights first
 
-    hash_opts = {key: vals for key, vals in pars.items()
+    hash_opts = {key: vals for key, vals in list(pars.items())
                  if key in ['stop_words', 'n_features',
                             'binary', 'analyser', 'ngram_range']}
     fe = HashingVectorizer(input='filename', norm=None, decode_error='ignore',
@@ -465,7 +465,7 @@ class FeatureVectorizer(object):
                     vect = make_pipeline(vect, tfidf)
                 self._vect = vect
             else:
-                opts_tfidf = {key: val for key, val in pars.items()
+                opts_tfidf = {key: val for key, val in list(pars.items())
                               if key in ['stop_words', 'use_idf',
                                          'ngram_range', 'analyzer',
                                          'min_df', 'max_df']}
@@ -724,7 +724,7 @@ class FeatureVectorizer(object):
                     row[key] = pars[key]
                 out.append(row)
             except Exception:
-                print(pars.keys())
+                print((list(pars.keys())))
                 traceback.print_exc()
 
         return out

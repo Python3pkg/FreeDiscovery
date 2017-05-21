@@ -145,7 +145,7 @@ class DocumentIndex(object):
             if strict:
                 raise NotFound('\n'.join(msg))
             else:
-                print('Warning: ' + '\n'.join(msg))
+                print(('Warning: ' + '\n'.join(msg)))
 
         if drop:
             # ignore all additional columns
@@ -246,14 +246,14 @@ class DocumentIndex(object):
         if res is not None:
             for index, row in res[res_keys].iterrows():
                 db_sel_dict = db.loc[index].to_dict()
-                for key, val in db_sel_dict.items():
+                for key, val in list(db_sel_dict.items()):
                     out[key].append(val)
-                for key, val in row.to_dict().items():
+                for key, val in list(row.to_dict().items()):
                     out[key].append(val)
         else:
             for index, row in db.iterrows():
                 row_dict = row.to_dict()
-                for key, val in row_dict.items():
+                for key, val in list(row_dict.items()):
                     out[key].append(val)
         return out
 

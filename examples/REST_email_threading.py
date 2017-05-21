@@ -4,7 +4,7 @@ Email threading Example [REST API]
 
 Thread a email collection
 """
-from __future__ import print_function
+
 
 from time import time
 import sys

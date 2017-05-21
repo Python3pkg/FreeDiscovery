@@ -40,12 +40,12 @@ def test_api_lsi(app):
     data = app.get_check(method, data=dict(parent_id=dsid,))
     method = V01 + "/lsi/{}".format(lid)
     data = app.get_check(method)
-    for key, vals in lsi_pars.items():
+    for key, vals in list(lsi_pars.items()):
         assert vals == data[key]
 
     assert sorted(data.keys()) == sorted(["n_components", "parent_id"])
 
-    for key in data.keys():
+    for key in list(data.keys()):
         assert data[key] == lsi_pars[key]
 
 
@@ -75,8 +75,7 @@ def _api_categorization_wrapper(app, solver, cv, n_categories,
         training_set = ds_input['training_set']
     else:
         assert n_categories_train <= n_categories
-        training_set = list(filter(lambda x: x['category'] in categories_list[:n_categories_train],
-                            ds_input['training_set']))
+        training_set = list([x for x in ds_input['training_set'] if x['category'] in categories_list[:n_categories_train]])
 
     pars = {
           'parent_id': parent_id,
@@ -190,8 +189,7 @@ _categoriazation_pars = itertools.product(["LinearSVC", "LogisticRegression",
                                            "NearestNeighbor", 'xgboost'],
                                           ['', 'cv'])
 
-_categoriazation_pars = filter(lambda args: not (args[0].startswith('Nearest') and args[1] == 'cv'),
-                               _categoriazation_pars)
+_categoriazation_pars = [args for args in _categoriazation_pars if not (args[0].startswith('Nearest') and args[1] == 'cv')]
 
 
 @pytest.mark.parametrize("solver, cv", _categoriazation_pars)

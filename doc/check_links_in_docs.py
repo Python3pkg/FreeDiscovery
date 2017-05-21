@@ -101,8 +101,8 @@ if __name__ == '__main__':
         print('BROKEN LINKS:')
         i = 1
         for link in broken_links:
-            print (str(i) + ') ' + link[0])
-            print ('It happened on the page with URL: ' + link[1])
+            print((str(i) + ') ' + link[0]))
+            print(('It happened on the page with URL: ' + link[1]))
             i += 1
             print('')
 

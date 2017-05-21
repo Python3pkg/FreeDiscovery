@@ -764,7 +764,7 @@ class ClusteringApiElement(Resource):
                 row_docs = []
                 for idx, row in group.iterrows():
                     row_docs.append({key: val
-                                     for key, val in row.to_dict().items()
+                                     for key, val in list(row.to_dict().items())
                                      if key in valid_keys})
                 row['documents'] = row_docs
                 irow = {'documents': row_docs, 'cluster_id': int(name),
@@ -850,7 +850,7 @@ class DupDetectionApiElement(Resource):
 
             row_docs = []
             for idx, row in group.iterrows():
-                row_docs.append({key: val for key, val in row.to_dict().items()
+                row_docs.append({key: val for key, val in list(row.to_dict().items())
                                  if key in valid_keys})
             row['documents'] = row_docs
             res.append({'documents': row_docs, 'cluster_id': name,

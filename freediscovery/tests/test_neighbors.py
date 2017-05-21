@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 #from __future__ import unicode_literals
 
 import os.path
@@ -75,7 +75,7 @@ def test_nearest_neighbor_ranker(n_categories):
     nn.fit(X_train)
     S_ref_nn, idx_ref_nn = nn.kneighbors(X_test)
 
-    assert_equal(idx_pred[range(len(label_pred)), label_pred], idx_ref_nn[:,0])
+    assert_equal(idx_pred[list(range(len(label_pred))), label_pred], idx_ref_nn[:,0])
     assert_allclose(np.max(y_pred, axis=1)[:, None], 1 - S_ref_nn)
 
 

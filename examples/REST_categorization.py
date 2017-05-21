@@ -5,7 +5,7 @@ Categorization Example [REST API]
 An example to illustrate binary categorizaiton with FreeDiscovery
 """
 
-from __future__ import print_function
+
 
 from time import time, sleep
 import os.path
@@ -81,7 +81,7 @@ if __name__ == '__main__':
     res = requests.get(url).json()
 
     print('\n'.join(['     - {}: {}'.format(key, val)
-          for key, val in res.items() if "filenames" not in key]))
+          for key, val in list(res.items()) if "filenames" not in key]))
 
     # 3. Document categorization with LSI (used for Nearest Neighbors method)
 
@@ -141,7 +141,7 @@ if __name__ == '__main__':
         res = requests.get(url).json()
 
         print('\n'.join(['     - {}: {}'.format(key, val)
-              for key, val in res.items() if key not in ['index', 'category']]))
+              for key, val in list(res.items()) if key not in ['index', 'category']]))
 
         print("\n3.c Categorize the complete dataset with this model")
         url = BASE_URL + '/categorization/{}/predict'.format(mid)

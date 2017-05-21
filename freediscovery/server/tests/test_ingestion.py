@@ -25,7 +25,7 @@ def test_get_features(app):
 
     method = V01 + "/feature-extraction/{}".format(dsid)
     data = app.get_check(method)
-    for key, val in pars.items():
+    for key, val in list(pars.items()):
         if key in ['data_dir', 'dataset_definition']:
             continue
         assert val == data[key]
@@ -93,7 +93,7 @@ def test_get_search_filenames(app):
     method = V01 + "/feature-extraction/{}/id-mapping".format(dsid)
 
     def _filter_dict(x, filter_field):
-        return {key: val for key, val in x.items() if key == filter_field}
+        return {key: val for key, val in list(x.items()) if key == filter_field}
 
     response_ref = {'internal_id': 'int',
                     'file_path': 'str',
